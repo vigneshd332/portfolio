@@ -115,6 +115,39 @@ export default function init() {
   //
 
   window.addEventListener("resize", onWindowResize);
+
+  // Controls
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "w" || e.key === "ArrowUp")
+      spaceship.velocity.translation.z = 0.3;
+    if (e.key === "s" || e.key === "ArrowDown")
+      spaceship.velocity.translation.z = -0.3;
+    if (e.key === "a" || e.key === "ArrowLeft")
+      spaceship.velocity.rotation.y = 0.01;
+    if (e.key === "d" || e.key === "ArrowRight")
+      spaceship.velocity.rotation.y = -0.01;
+  });
+
+  window.addEventListener("keyup", (e) => {
+    if (
+      e.key === "w" ||
+      e.key === "ArrowUp" ||
+      e.key === "ArrowDown" ||
+      e.key === "s"
+    )
+      spaceship.velocity.translation.z = 0;
+    if (
+      e.key === "a" ||
+      e.key === "ArrowLeft" ||
+      e.key === "ArrowRight" ||
+      e.key === "d"
+    )
+      spaceship.velocity.rotation.y = 0;
+  });
+
+  //
+
   animate();
 }
 

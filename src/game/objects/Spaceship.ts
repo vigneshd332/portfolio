@@ -43,5 +43,17 @@ export default class Spaceship {
 
   update() {
     if (!this.spaceship) return;
+
+    // Movement and Rotation
+    this.spaceship.translateX(this.velocity.translation.x);
+    this.spaceship.translateY(this.velocity.translation.y);
+    this.spaceship.translateZ(this.velocity.translation.z);
+    this.spaceship.rotateX(this.velocity.rotation.x);
+    this.spaceship.rotateY(
+      this.velocity.translation.z >= 0
+        ? this.velocity.rotation.y
+        : -this.velocity.rotation.y
+    );
+    this.spaceship.rotateZ(this.velocity.rotation.z);
   }
 }
