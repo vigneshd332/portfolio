@@ -1,5 +1,7 @@
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import CameraControl from "./CameraControl";
 
 interface spaceshipVelocity {
   translation: {
@@ -17,8 +19,16 @@ interface spaceshipVelocity {
 export default class Spaceship {
   spaceship!: THREE.Group;
   velocity!: spaceshipVelocity;
+  cameraControl!: CameraControl;
+  controls: OrbitControls;
+  bobUp: boolean;
 
-  constructor(scene: THREE.Scene, loader: GLTFLoader) {
+  constructor(
+    scene: THREE.Scene,
+    loader: GLTFLoader,
+    camera: THREE.PerspectiveCamera,
+    controls: OrbitControls
+  ) {
     loader.load("models/spaceship/spaceship.gltf", (gltf: GLTF) => {
       scene.add(gltf.scene);
       gltf.scene.position.set(0, 3, 0);
@@ -26,6 +36,7 @@ export default class Spaceship {
       gltf.scene.rotation.set(0, Math.PI, 0);
 
       this.spaceship = gltf.scene;
+      this.cameraControl = new CameraControl(camera);
       this.velocity = {
         translation: {
           x: 0,
@@ -39,10 +50,22 @@ export default class Spaceship {
         },
       };
     });
+
+    this.controls = controls;
+    this.bobUp = true;
   }
 
   update() {
     if (!this.spaceship) return;
+
+    // Spaceship bobbing movement
+    if (this.bobUp) {
+      this.spaceship.translateY(0.02);
+      if (this.spaceship.position.y >= 3.5) this.bobUp = false;
+    } else {
+      this.spaceship.translateY(-0.02);
+      if (this.spaceship.position.y <= 2.5) this.bobUp = true;
+    }
 
     // Movement and Rotation
     this.spaceship.translateX(this.velocity.translation.x);
@@ -55,5 +78,7 @@ export default class Spaceship {
         : -this.velocity.rotation.y
     );
     this.spaceship.rotateZ(this.velocity.rotation.z);
+
+    this.cameraControl.update(this.controls, this.spaceship.position);
   }
 }

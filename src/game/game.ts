@@ -10,8 +10,8 @@ let container: Element;
 let camera: THREE.PerspectiveCamera,
   scene: THREE.Scene,
   renderer: THREE.WebGLRenderer;
-let controls: OrbitControls, water: Water, sun: THREE.Vector3;
-let spaceship: Spaceship;
+export let controls: OrbitControls;
+let spaceship: Spaceship, water: Water, sun: THREE.Vector3;
 let rendered: boolean = false;
 
 const loader = new GLTFLoader();
@@ -38,9 +38,15 @@ export default function init() {
     1,
     20000
   );
-  camera.position.set(90, 40, 60);
+  camera.position.set(90, 60, 40);
 
-  //
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.maxPolarAngle = Math.PI * 0.6;
+  controls.minDistance = 40.0;
+  controls.maxDistance = 120.0;
+  controls.update();
+
+  spaceship = new Spaceship(scene, loader, camera, controls);
 
   sun = new THREE.Vector3();
 
@@ -99,18 +105,9 @@ export default function init() {
 
     //@ts-ignore
     scene.environment = pmremGenerator.fromScene(sky).texture;
-
-    spaceship = new Spaceship(scene, loader);
   }
 
   updateSun();
-
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI * 0.495;
-  controls.target.set(0, 10, 0);
-  controls.minDistance = 40.0;
-  controls.maxDistance = 200.0;
-  controls.update();
 
   //
 
@@ -120,13 +117,13 @@ export default function init() {
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "w" || e.key === "ArrowUp")
-      spaceship.velocity.translation.z = 0.3;
+      spaceship.velocity.translation.z = 3;
     if (e.key === "s" || e.key === "ArrowDown")
-      spaceship.velocity.translation.z = -0.3;
+      spaceship.velocity.translation.z = -3;
     if (e.key === "a" || e.key === "ArrowLeft")
-      spaceship.velocity.rotation.y = 0.01;
+      spaceship.velocity.rotation.y = 0.03;
     if (e.key === "d" || e.key === "ArrowRight")
-      spaceship.velocity.rotation.y = -0.01;
+      spaceship.velocity.rotation.y = -0.03;
   });
 
   window.addEventListener("keyup", (e) => {
@@ -160,7 +157,9 @@ function onWindowResize() {
 
 function animate() {
   spaceship.update();
-  requestAnimationFrame(animate);
+  setTimeout(() => {
+    requestAnimationFrame(animate);
+  }, 1000 / 60); // 60 fps limiter
   render();
 }
 
