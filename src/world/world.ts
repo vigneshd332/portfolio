@@ -31,8 +31,8 @@ let container: Element,
     new THREE.Vector3(-1358, 69, -3583),
   ];
 
-export default async function init() {
-  container = document.getElementsByClassName("App")[0];
+export default async function init(setLoaded: (loaded: boolean) => void) {
+  container = document.getElementById("world") as Element;
 
   if (!container || rendered) return;
   rendered = true;
@@ -43,10 +43,10 @@ export default async function init() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   container.appendChild(renderer.domElement);
 
-  THREE.DefaultLoadingManager.onProgress = function (item, loaded, total) {
-    const progressBar = document.getElementsByClassName("Loader")[0];
-    progressBar.innerHTML = `${loaded} / ${total} objects loaded`;
-    if (loaded === 30) progressBar.remove();
+  THREE.DefaultLoadingManager.onProgress = function (_item, loaded, total) {
+    const progressBar = document.getElementById("Loader") as Element;
+    progressBar.innerHTML = `${loaded} / ${total} objects loaded...`;
+    if (loaded === 30) setLoaded(true);
   };
 
   scene = new THREE.Scene();

@@ -1,15 +1,10 @@
-import React from "react";
-import "./App.css";
-import init from "./world/world";
+import WorldHome from "./ui/pages/WorldHome/WorldHome";
+import styles from "./App.module.css";
 
-function App() {
-  React.useEffect(() => {
-    init();
-    console.log("App initialized");
-  }, []);
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <div className="Loader"></div>
+    <div className={styles.App}>
+      <WorldHome />
     </div>
   );
 }
