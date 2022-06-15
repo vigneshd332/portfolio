@@ -74,8 +74,8 @@ export default class Spaceship {
     // Movement and Rotation
     this.spaceship.translateX(this.velocity.translation.x);
     if (
-      !(this.spaceship.position.y < 50 && this.spaceship.position.y < 0) &&
-      !(this.spaceship.position.y > 2000 && this.spaceship.position.y > 0)
+      !(this.spaceship.position.y < 5 && this.velocity.translation.y < 0) &&
+      !(this.spaceship.position.y > 2000 && this.velocity.translation.y > 0)
     )
       this.spaceship.translateY(this.velocity.translation.y);
     this.spaceship.translateZ(this.velocity.translation.z);
