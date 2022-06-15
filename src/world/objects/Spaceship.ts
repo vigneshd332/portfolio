@@ -22,6 +22,7 @@ export default class Spaceship {
   cameraControl!: CameraControl;
   controls: OrbitControls;
   bobUp: boolean;
+  bobStep: number;
 
   constructor(
     scene: THREE.Scene,
@@ -31,9 +32,9 @@ export default class Spaceship {
     const loader = new GLTFLoader();
     loader.load("models/spaceship/spaceship.gltf", (gltf: GLTF) => {
       scene.add(gltf.scene);
-      gltf.scene.position.set(0, 100, 0);
+      gltf.scene.position.set(-1350, 90, -3580);
       gltf.scene.scale.set(0.008, 0.008, 0.008);
-      gltf.scene.rotation.set(0, Math.PI, 0);
+      gltf.scene.rotation.set(0, 0, 0);
 
       this.spaceship = gltf.scene;
       this.cameraControl = new CameraControl(camera);
@@ -53,6 +54,7 @@ export default class Spaceship {
 
     this.controls = controls;
     this.bobUp = true;
+    this.bobStep = 0;
   }
 
   update() {
@@ -60,18 +62,20 @@ export default class Spaceship {
 
     // Spaceship bobbing movement
     if (this.bobUp) {
-      this.spaceship.translateY(0.02);
-      if (this.spaceship.position.y >= 3.5) this.bobUp = false;
+      this.spaceship.translateY(0.03);
+      this.bobStep++;
+      if (this.bobStep > 30) this.bobUp = false;
     } else {
-      this.spaceship.translateY(-0.02);
-      if (this.spaceship.position.y <= 2.5) this.bobUp = true;
+      this.spaceship.translateY(-0.03);
+      this.bobStep--;
+      if (this.bobStep < -30) this.bobUp = true;
     }
 
     // Movement and Rotation
     this.spaceship.translateX(this.velocity.translation.x);
     if (
       !(this.spaceship.position.y < 50 && this.spaceship.position.y < 0) &&
-      !(this.spaceship.position.y > 500 && this.spaceship.position.y > 0)
+      !(this.spaceship.position.y > 2000 && this.spaceship.position.y > 0)
     )
       this.spaceship.translateY(this.velocity.translation.y);
     this.spaceship.translateZ(this.velocity.translation.z);

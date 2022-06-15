@@ -5,7 +5,10 @@ import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { waternormals } from "./textures/waternormals";
 import Spaceship from "./objects/Spaceship";
 import Platform from "./objects/Platform";
+import XQ6Platform from "./objects/XQ6Platform";
 import loadPlatform1Model from "./loaders/Platform1Loader";
+import loadXQ6Model from "./loaders/XQ6Loader";
+import { Vector3 } from "three";
 
 let container: Element,
   camera: THREE.PerspectiveCamera,
@@ -18,10 +21,11 @@ let container: Element,
   rendered: boolean = false,
   platforms: Platform[] = [],
   platformPositions: THREE.Vector3[] = [
-    new THREE.Vector3(0, 69, -1000),
-    new THREE.Vector3(1256, 69, -2000),
-    new THREE.Vector3(1100, 69, -1500),
-    new THREE.Vector3(1176, 69, -1000),
+    new THREE.Vector3(-2400, 69, -1000),
+    new THREE.Vector3(-1500, 69, 0),
+    new THREE.Vector3(-500, 69, -2000),
+    new THREE.Vector3(-1176, 69, -1000),
+    new THREE.Vector3(-1358, 69, -3583),
   ];
 
 export default async function init() {
@@ -44,7 +48,6 @@ export default async function init() {
     1,
     20000
   );
-  camera.position.set(50, 50, 200);
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.maxPolarAngle = Math.PI * 0.6;
@@ -53,6 +56,9 @@ export default async function init() {
   controls.update();
 
   spaceship = new Spaceship(scene, camera, controls);
+
+  const xq6PlatformModel = await loadXQ6Model();
+  new XQ6Platform(scene, xq6PlatformModel, new Vector3(0, 700, 2000));
 
   const platform1Model: THREE.Group = await loadPlatform1Model();
 
@@ -64,7 +70,7 @@ export default async function init() {
 
   // Water
 
-  const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
 
   water = new Water(waterGeometry, {
     textureWidth: 512,
@@ -87,7 +93,7 @@ export default async function init() {
   // Skybox
 
   const sky = new Sky();
-  sky.scale.setScalar(10000);
+  sky.scale.setScalar(30000);
   scene.add(sky);
 
   const skyUniforms = sky.material.uniforms;
@@ -97,8 +103,8 @@ export default async function init() {
   skyUniforms["mieDirectionalG"].value = 0.8;
 
   const parameters = {
-    elevation: 2,
-    azimuth: 180,
+    elevation: 4,
+    azimuth: 0,
   };
 
   const pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -124,9 +130,9 @@ export default async function init() {
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "w" || e.key === "ArrowUp")
-      spaceship.velocity.translation.z = 4;
+      spaceship.velocity.translation.z = 5;
     if (e.key === "s" || e.key === "ArrowDown")
-      spaceship.velocity.translation.z = -4;
+      spaceship.velocity.translation.z = -5;
     if (e.key === "a" || e.key === "ArrowLeft")
       spaceship.velocity.rotation.y = 0.03;
     if (e.key === "d" || e.key === "ArrowRight")
