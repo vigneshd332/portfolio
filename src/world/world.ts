@@ -9,6 +9,11 @@ import XQ6Platform from "./objects/XQ6Platform";
 import loadPlatform1Model from "./loaders/Platform1Loader";
 import loadXQ6Model from "./loaders/XQ6Loader";
 import { Vector3 } from "three";
+import {
+  loadGithubModel,
+  loadLinkedinModel,
+  loadTwitterModel,
+} from "./loaders/IconLoader";
 
 let container: Element,
   camera: THREE.PerspectiveCamera,
@@ -23,7 +28,6 @@ let container: Element,
   platformPositions: THREE.Vector3[] = [
     new THREE.Vector3(-2400, 69, -1000),
     new THREE.Vector3(-1500, 69, 0),
-    new THREE.Vector3(-500, 69, -2000),
     new THREE.Vector3(-1176, 69, -1000),
     new THREE.Vector3(-1358, 69, -3583),
   ];
@@ -61,10 +65,41 @@ export default async function init() {
   new XQ6Platform(scene, xq6PlatformModel, new Vector3(0, 700, 2000));
 
   const platform1Model: THREE.Group = await loadPlatform1Model();
-
   platformPositions.forEach((position) => {
     platforms.push(new Platform(scene, platform1Model, position));
   });
+
+  // Social Icons
+  const githubModel = await loadGithubModel();
+  const twitterModel = await loadTwitterModel();
+  const linkedinModel = await loadLinkedinModel();
+  platforms.push(
+    new Platform(
+      scene,
+      platform1Model,
+      new Vector3(0, 69, -2000),
+      githubModel,
+      "github"
+    )
+  );
+  platforms.push(
+    new Platform(
+      scene,
+      platform1Model,
+      new THREE.Vector3(-500, 69, -2000),
+      twitterModel,
+      "twitter"
+    )
+  );
+  platforms.push(
+    new Platform(
+      scene,
+      platform1Model,
+      new THREE.Vector3(-1000, 69, -2000),
+      linkedinModel,
+      "linkedin"
+    )
+  );
 
   sun = new THREE.Vector3();
 

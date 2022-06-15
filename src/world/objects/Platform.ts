@@ -1,15 +1,20 @@
 import * as THREE from "three";
+import Icon from "./Icon";
 
 export default class Platform {
   platform: THREE.Group;
   bobUp: boolean;
   bobLeft: boolean;
   bobLeftSteps: number;
+  icon?: Icon;
+  iconName?: string;
 
   constructor(
     scene: THREE.Scene,
     platformModel: THREE.Group,
-    _position: THREE.Vector3
+    _position: THREE.Vector3,
+    iconModel?: THREE.Group,
+    iconName?: string
   ) {
     const model = platformModel.clone();
     scene.add(model);
@@ -22,6 +27,11 @@ export default class Platform {
     model.rotation.set(0, Math.PI, 0);
 
     this.platform = model;
+    this.icon =
+      iconModel && iconName
+        ? new Icon(scene, iconModel, _position, iconName)
+        : undefined;
+    if (iconName) this.iconName = iconName;
 
     this.bobUp = true;
     this.bobLeft = false;
@@ -49,5 +59,8 @@ export default class Platform {
       this.bobLeftSteps--;
       if (this.bobLeftSteps < -90) this.bobLeft = true;
     }
+
+    // Icon Update
+    if (this.icon) this.icon.update();
   }
 }
