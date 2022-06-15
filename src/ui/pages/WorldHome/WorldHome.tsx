@@ -9,8 +9,8 @@ const WorldHome = (): JSX.Element => {
 
   useEffect(() => {
     if (loaded) document.getElementById("Loader")?.remove();
-    window.addEventListener("keydown", () => {
-      setGameStart(true);
+    window.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "w" || e.key === "ArrowUp") setGameStart(true);
     });
     return () => {
       window.removeEventListener("keydown", () => {});
