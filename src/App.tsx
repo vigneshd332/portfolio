@@ -7,7 +7,11 @@ function App() {
     init();
     console.log("App initialized");
   }, []);
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <div className="Loader"></div>
+    </div>
+  );
 }
 
 export default App;
