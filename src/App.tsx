@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import init from "./game/game";
+import init from "./world/world";
 
 function App() {
   React.useEffect(() => {

@@ -25,14 +25,14 @@ export default class Spaceship {
 
   constructor(
     scene: THREE.Scene,
-    loader: GLTFLoader,
     camera: THREE.PerspectiveCamera,
     controls: OrbitControls
   ) {
+    const loader = new GLTFLoader();
     loader.load("models/spaceship/spaceship.gltf", (gltf: GLTF) => {
       scene.add(gltf.scene);
-      gltf.scene.position.set(0, 3, 0);
-      gltf.scene.scale.set(0.0065, 0.0065, 0.0065);
+      gltf.scene.position.set(0, 100, 0);
+      gltf.scene.scale.set(0.008, 0.008, 0.008);
       gltf.scene.rotation.set(0, Math.PI, 0);
 
       this.spaceship = gltf.scene;
@@ -69,7 +69,11 @@ export default class Spaceship {
 
     // Movement and Rotation
     this.spaceship.translateX(this.velocity.translation.x);
-    this.spaceship.translateY(this.velocity.translation.y);
+    if (
+      !(this.spaceship.position.y < 50 && this.spaceship.position.y < 0) &&
+      !(this.spaceship.position.y > 500 && this.spaceship.position.y > 0)
+    )
+      this.spaceship.translateY(this.velocity.translation.y);
     this.spaceship.translateZ(this.velocity.translation.z);
     this.spaceship.rotateX(this.velocity.rotation.x);
     this.spaceship.rotateY(

@@ -11,7 +11,7 @@ export default class CameraControl {
   update(controls: OrbitControls, position: Vector3) {
     if (!this._camera) return;
     const cameraPosition = position.clone();
-    controls.target = cameraPosition.add(new Vector3(0, 40, 0));
+    controls.target = cameraPosition.add(new Vector3(0, 60, 0));
     controls.update();
   }
 }
