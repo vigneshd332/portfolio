@@ -19,9 +19,18 @@ body {
   color: #eaeaeaea;
 }
 
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
 button {
   border: none;
   background: none;
   color: #eaeaeaea;
   cursor: pointer;
+}
+
+#nav-title > .wrap {
+  border-right: 0.08em solid #666;
 }

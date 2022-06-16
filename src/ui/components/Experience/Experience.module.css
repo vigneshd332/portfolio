@@ -1,0 +1,33 @@
+.experienceWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  background-image: url("../../../assets/grey-mountains.png");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.experience {
+  height: 100%;
+  width: var(--margin-provider);
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.experienceHeader {
+  margin-top: 2rem;
+  font-size: 3rem;
+}
+
+.experienceCards {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}

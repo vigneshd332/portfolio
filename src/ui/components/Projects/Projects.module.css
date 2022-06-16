@@ -1,0 +1,35 @@
+.projectsWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  background-image: url("../../../assets/projects-bg.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projects {
+  height: 100%;
+  width: 100%;
+  width: var(--margin-provider);
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.projectsHeader {
+  margin-top: 2rem;
+  font-size: 3rem;
+}
+
+.projectCards {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}

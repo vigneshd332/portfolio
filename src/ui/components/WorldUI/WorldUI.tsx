@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./WorldUI.module.css";
 import wasd from "../../../assets/wasd.png";
 import arrows from "../../../assets/arrows.png";
@@ -6,14 +7,29 @@ import fkey from "../../../assets/f.png";
 import uparrow from "../../../assets/upArrow.png";
 
 const WorldUI = (): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <div className={styles.worldUI}>
       <div className={styles.worldUINavContainer}>
         <div className={styles.worldUINav}>
           <h2 className={styles.theChosenOne}>Vignesh's World</h2>
           <div className={styles.navButtons}>
-            <button className={styles.navButton}>ABOUT</button>
-            <button className={styles.navButton}>RESUME</button>
+            <button
+              className={styles.navButton}
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
+              ABOUT
+            </button>
+            <button
+              className={styles.navButton}
+              onClick={() => {
+                window.open("/resume.pdf");
+              }}
+            >
+              RESUME
+            </button>
           </div>
         </div>
       </div>
@@ -21,16 +37,17 @@ const WorldUI = (): JSX.Element => {
         <div className={styles.instructions}>
           <div className={styles.instructionListItem}>
             <p>
-              • You can move around and interact with different elements to see
-              my work, to see a simpler version click the about button .
+              • This is supposed to be an interactive portfolio. Its work in
+              progress, but feel free to have a look around. To see a simpler
+              version click the about button.
             </p>
           </div>
           <div className={styles.instructionListItem}>
             <p>
               • Use the{" "}
               <img className={styles.keyImg} src={wasd} alt="WASD keys" /> keys
-              or <img className={styles.keyImg} src={arrows} alt="arrow keys" />
-              to move around .
+              or <img className={styles.keyImg} src={arrows} alt="arrow keys" />{" "}
+              keys to move around .
             </p>
           </div>
           <div className={styles.instructionListItem}>

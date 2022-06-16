@@ -1,0 +1,17 @@
+.footer {
+  background-color: #000000;
+  padding-bottom: 0.7rem;
+}
+
+.footerIcon {
+  height: auto;
+  width: 20px;
+  padding: 3px;
+  padding-bottom: 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.threeIcon {
+  filter: invert(100%);
+}
