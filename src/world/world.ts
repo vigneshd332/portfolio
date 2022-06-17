@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Water } from "three/examples/jsm/objects/Water.js";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
-import { waternormals } from "./textures/waternormals";
 import Spaceship from "./objects/Spaceship";
 import Platform from "./objects/Platform";
 import XQ6Platform from "./objects/XQ6Platform";
@@ -116,7 +115,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
     textureWidth: 512,
     textureHeight: 512,
     waterNormals: new THREE.TextureLoader().load(
-      waternormals,
+      "textures/waternormals.jpg",
       function (texture) {
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
       }
