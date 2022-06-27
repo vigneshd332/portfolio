@@ -33,3 +33,9 @@
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
+
+@media screen and (max-width: 500px) {
+  .projectsHeader {
+    font-size: 2.5rem;
+  }
+}

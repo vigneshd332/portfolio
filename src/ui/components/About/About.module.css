@@ -96,13 +96,15 @@
 .doGodsHaveToGiveIntros {
   font-size: 1.2rem;
   letter-spacing: 1px;
-  max-width: 850px;
+  max-width: min(850px, var(--margin-provider));
   line-height: 1.7rem;
 }
 
 .links {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: space-around;
 }
 
 .link {
@@ -111,11 +113,50 @@
   border-radius: 10px;
   font-family: "Poppins";
   background-color: #2b2b2b;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 @supports (backdrop-filter: blur(2px)) {
   .About {
     backdrop-filter: blur(2px);
     background-color: #00000077;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .About {
+    height: 100%;
+  }
+  .vesselOfGod {
+    margin-top: 3rem;
+  }
+  .doGodsHaveToGiveIntros {
+    margin-top: 2rem;
+  }
+  .links {
+    margin-top: 2rem;
+  }
+  .navTitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutNavContainer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .navTitle {
+    font-size: 1.2rem;
+  }
+  .aboutNavButton {
+    font-size: 0.8rem;
+    padding: 2px 4px;
+    margin-right: 0;
+  }
+  .doGodsHaveToGiveIntros {
+    font-size: 1.05rem;
   }
 }

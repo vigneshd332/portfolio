@@ -39,7 +39,7 @@ const About = (): JSX.Element => {
             Hey! I'm Vignesh, a software developer who also knows iron and steel
             making &#40;can't say I'm very fond of it&#41; and a junior at NIT
             Trichy. I love taking on challenges that are out of the ordinary and
-            doings things that I haven't done before. I'm my free-time, you can
+            doings things that I haven't done before. In my free-time, you can
             find me producing music, sipping on Coffee or just wondering why
             Linux is so damn good.
           </div>
