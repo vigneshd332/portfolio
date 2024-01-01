@@ -15,7 +15,7 @@ export default class XQ6Platform {
       _position.y + Math.random() * 1,
       _position.z
     );
-    model.scale.set(4, 4, 4);
+    model.scale.set(8, 8, 8);
     model.rotation.set(0, Math.PI + 1, 0);
 
     this.platform = model;
