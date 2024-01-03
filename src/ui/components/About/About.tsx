@@ -50,7 +50,6 @@ const About = (): JSX.Element => {
             <button className={styles.link}>
               <a href="#experience">EXPERIENCE</a>
             </button>
-            <button className={styles.link}>SKILLS</button>
             <button
               className={styles.link}
               onClick={() => {

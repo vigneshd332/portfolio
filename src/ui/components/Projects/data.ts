@@ -4,7 +4,7 @@ import code from "../../../assets/codecharacter.png";
 import globe from "../../../assets/globe.svg";
 import github from "../../../assets/github.svg";
 
-export const cardData = [
+export const cardData: CardData[] = [
   {
     img: code,
     title: "Code Character | A strategy based programming game",
