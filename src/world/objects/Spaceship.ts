@@ -32,7 +32,7 @@ export default class Spaceship {
     const loader = new GLTFLoader();
     loader.load("models/spaceship/spaceship.gltf", (gltf: GLTF) => {
       scene.add(gltf.scene);
-      gltf.scene.position.set(-1350, 90, -3580);
+      gltf.scene.position.set(-3350, 1200, -7080);
       gltf.scene.scale.set(0.008, 0.008, 0.008);
       gltf.scene.rotation.set(0, 0, 0);
 
@@ -75,7 +75,7 @@ export default class Spaceship {
     this.spaceship.translateX(this.velocity.translation.x);
     if (
       !(this.spaceship.position.y < 5 && this.velocity.translation.y < 0) &&
-      !(this.spaceship.position.y > 2000 && this.velocity.translation.y > 0)
+      !(this.spaceship.position.y > 4000 && this.velocity.translation.y > 0)
     )
       this.spaceship.translateY(this.velocity.translation.y);
     this.spaceship.translateZ(this.velocity.translation.z);

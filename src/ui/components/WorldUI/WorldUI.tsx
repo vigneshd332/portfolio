@@ -60,7 +60,10 @@ const WorldUI = (): JSX.Element => {
             </p>
           </div>
           <div className={styles.instructionListItem}>
-            <p>Happy Exploring :&#41;</p>
+            <p>• Click on text and icons to interact .</p>
+          </div>
+          <div className={styles.instructionListItem}>
+            <p>Welcome again :&#41;</p>
           </div>
         </div>
         <div className={styles.startMessage}>

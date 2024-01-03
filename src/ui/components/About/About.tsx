@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import TxtRotate from "../../../helpers/TypeCarousel";
+import TxtRotate from "../../helpers/TypeCarousel";
 import styles from "./About.module.css";
 import god from "../../../assets/god.jpg";
 
@@ -50,7 +50,6 @@ const About = (): JSX.Element => {
             <button className={styles.link}>
               <a href="#experience">EXPERIENCE</a>
             </button>
-            <button className={styles.link}>SKILLS</button>
             <button
               className={styles.link}
               onClick={() => {

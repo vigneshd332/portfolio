@@ -59,8 +59,5 @@ export default class Platform {
       this.bobLeftSteps--;
       if (this.bobLeftSteps < -90) this.bobLeft = true;
     }
-
-    // Icon Update
-    if (this.icon) this.icon.update();
   }
 }
