@@ -28,15 +28,15 @@ export default function loadEvents(
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "w" || e.key === "ArrowUp")
-      spaceship.velocity.translation.z = 50;
+      spaceship.velocity.translation.z = 20;
     if (e.key === "s" || e.key === "ArrowDown")
-      spaceship.velocity.translation.z = -50;
+      spaceship.velocity.translation.z = -20;
     if (e.key === "a" || e.key === "ArrowLeft")
-      spaceship.velocity.rotation.y = 0.03;
+      spaceship.velocity.rotation.y = 0.02;
     if (e.key === "d" || e.key === "ArrowRight")
-      spaceship.velocity.rotation.y = -0.03;
-    if (e.key === "r") spaceship.velocity.translation.y = 30;
-    if (e.key === "f") spaceship.velocity.translation.y = -30;
+      spaceship.velocity.rotation.y = -0.02;
+    if (e.key === "r") spaceship.velocity.translation.y = 10;
+    if (e.key === "f") spaceship.velocity.translation.y = -10;
   });
 
   window.addEventListener("keyup", (e) => {
