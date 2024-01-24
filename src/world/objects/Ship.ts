@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export default class Ship {
+export class Ship {
   platform: THREE.Group;
 
   constructor(

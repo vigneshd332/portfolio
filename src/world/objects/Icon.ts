@@ -32,7 +32,7 @@ const offsets: OffsetMap = {
   },
 };
 
-export default class Icon {
+export class Icon {
   icon: THREE.Group;
   iconName: string;
   rotationHandle?: NodeJS.Timeout;

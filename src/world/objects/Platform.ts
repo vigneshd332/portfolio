@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import Icon from "./Icon";
+import { Icon } from "./Icon";
 
-export default class Platform {
+export class Platform {
   platform: THREE.Group;
   bobUp: boolean;
   bobLeft: boolean;

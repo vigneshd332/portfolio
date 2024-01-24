@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import CameraControl from "./CameraControl";
+import { CameraControl } from "./CameraControl";
 
 interface spaceshipVelocity {
   translation: {
@@ -16,7 +16,7 @@ interface spaceshipVelocity {
   };
 }
 
-export default class Spaceship {
+export class Spaceship {
   spaceship!: THREE.Group;
   velocity!: spaceshipVelocity;
   cameraControl!: CameraControl;

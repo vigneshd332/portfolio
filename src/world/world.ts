@@ -1,10 +1,9 @@
 import * as THREE from "three";
 import { Water } from "three/examples/jsm/objects/Water.js";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
-import Spaceship from "./objects/Spaceship";
-import loadSceneAssets from "./loaders/LoadScene";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import loadEvents from "./loaders/LoadEvents";
+import { Spaceship } from "./objects";
+import { loadEvents, loadSceneAssets } from "./loaders";
 
 let container: Element,
   camera: THREE.PerspectiveCamera,
@@ -29,10 +28,10 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   container.appendChild(renderer.domElement);
 
-  THREE.DefaultLoadingManager.onProgress = function (_item, loaded, total) {
-    const progressBar = document.getElementById("Loader") as Element;
-    progressBar.innerHTML = `${loaded} / 48 objects loaded...`;
-    if (loaded === 48) setLoaded(true);
+  THREE.DefaultLoadingManager.onProgress = function (_item, loaded, _) {
+    const progressBar = document.getElementById("LoaderText") as Element;
+    progressBar.innerHTML = `${loaded} / 54 objects loaded...`;
+    if (loaded === 54) setLoaded(true);
   };
 
   scene = new THREE.Scene();
@@ -41,7 +40,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
     55,
     window.innerWidth / window.innerHeight,
     1,
-    20000
+    40000
   );
 
   controls = new OrbitControls(camera, renderer.domElement);

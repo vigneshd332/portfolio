@@ -1,10 +1,10 @@
 import * as THREE from "three";
-import Spaceship from "../objects/Spaceship";
 import {
   getMouseVector2,
   checkRayIntersections,
   getObjectsByName,
-} from "../helpers/RayCastHelper";
+} from "../helpers";
+import { Spaceship } from "../objects";
 
 function onWindowResize(
   camera: THREE.PerspectiveCamera,
@@ -16,7 +16,7 @@ function onWindowResize(
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-export default function loadEvents(
+export function loadEvents(
   scene: THREE.Scene,
   camera: THREE.PerspectiveCamera,
   renderer: THREE.WebGLRenderer,

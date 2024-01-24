@@ -17,7 +17,7 @@
   flex-direction: column;
 }
 
-.loader {
+.loaderContainer {
   position: absolute;
   top: 0;
   left: 0;
@@ -28,5 +28,27 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  color: white;
+}
+
+.loader {
   font-size: 2rem;
+}
+
+.redirectMessage {
+  margin-top: 2rem;
+}
+
+.redirectButton {
+  border: 2px solid white;
+  padding: 0.5rem;
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.redirectButton:hover {
+  background-color: white;
+  color: black;
 }

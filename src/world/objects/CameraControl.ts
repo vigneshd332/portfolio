@@ -1,7 +1,7 @@
 import { PerspectiveCamera, Vector3 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-export default class CameraControl {
+export class CameraControl {
   _camera: PerspectiveCamera;
 
   constructor(camera: PerspectiveCamera) {

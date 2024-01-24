@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Font } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 
-export default class FontInteractive {
+export class FontInteractive {
   mesh: InteractableMesh<TextGeometry, THREE.MeshBasicMaterial>;
   constructor(
     scene: THREE.Scene,

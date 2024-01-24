@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export default class XQ6Platform {
+export class XQ6Platform {
   platform: THREE.Group;
 
   constructor(
