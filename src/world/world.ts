@@ -30,8 +30,8 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
 
   THREE.DefaultLoadingManager.onProgress = function (_item, loaded, _) {
     const progressBar = document.getElementById("LoaderText") as Element;
-    progressBar.innerHTML = `${loaded} / 54 objects loaded...`;
-    if (loaded === 54) setLoaded(true);
+    progressBar.innerHTML = `${loaded} / 57 objects loaded...`;
+    if (loaded === 57) setLoaded(true);
   };
 
   scene = new THREE.Scene();

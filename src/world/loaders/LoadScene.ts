@@ -48,6 +48,7 @@ export async function loadSceneAssets(
         spawn.rotation,
         spawn.final_takeoff_offset,
         spawn.launch_delay,
+        spawn.vtol,
         spawn.post_takeoff_action,
         spawn.pre_takeoff_action
       )

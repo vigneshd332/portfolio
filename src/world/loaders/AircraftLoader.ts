@@ -8,3 +8,12 @@ export async function loadFlankerModel(): Promise<THREE.Group> {
     });
   });
 }
+
+export async function loadF35Model(): Promise<THREE.Group> {
+  return new Promise((resolve) => {
+    const loader = new GLTFLoader();
+    loader.load("models/f35/f-35.glb", (gltf: GLTF) => {
+      resolve(gltf.scene);
+    });
+  });
+}
