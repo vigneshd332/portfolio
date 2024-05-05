@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   background-color: #000000;
-  background-image: url("../../../assets/projects-bg.jpg");
+  background-image: url("../../../assets/projects-bg.webp");
   background-size: cover;
   display: flex;
   flex-direction: column;

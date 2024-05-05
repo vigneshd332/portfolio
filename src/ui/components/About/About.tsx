@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import TxtRotate from "../../helpers/TypeCarousel";
 import styles from "./About.module.css";
-import god from "../../../assets/god.jpg";
+import god from "../../../assets/god.webp";
 
 const About = (): JSX.Element => {
   useEffect(() => {

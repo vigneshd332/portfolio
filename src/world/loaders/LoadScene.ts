@@ -58,12 +58,14 @@ export async function loadSceneAssets(
   // Social Icons
   const socialSpawns = await getSocialSpawns();
   socialSpawns.forEach((spawn) => {
-    new Platform(
-      scene,
-      spawn.platformModel,
-      spawn.position,
-      spawn.socialModel,
-      spawn.iconName
+    updateables.push(
+      new Platform(
+        scene,
+        spawn.platformModel,
+        spawn.position,
+        spawn.socialModel,
+        spawn.iconName
+      )
     );
   });
 

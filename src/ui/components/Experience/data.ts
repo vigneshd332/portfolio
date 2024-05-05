@@ -1,10 +1,16 @@
-import delta from "../../../assets/delta.png";
+import delta from "../../../assets/delta.webp";
 import tedx from "../../../assets/tedx-logo.svg";
-import citi from "../../../assets/citi.png";
+import citi from "../../../assets/citi.webp";
 import globe from "../../../assets/globe.svg";
 import github from "../../../assets/github.svg";
 
 export const cardData: CardData[] = [
+  {
+    img: citi,
+    title: "Citi",
+    text: "Developed an update automation tool for creating update snapshots for the OpenLink Endur application. The tool was used by the team to automate the process of creating update snapshots, saving hours of manual work. Developed a node-wise XML comparison tool for comparing the XML Feeds of the Endur application's subcomponents.",
+    websites: [{ icon: globe, url: "https://www.citi.com/" }],
+  },
   {
     img: delta,
     title: "Delta Force",
@@ -23,11 +29,5 @@ export const cardData: CardData[] = [
       { icon: globe, url: "https://blog.tedxnittrichy.com/" },
       { icon: github, url: "https://github.com/tedxnittrichy" },
     ],
-  },
-  {
-    img: citi,
-    title: "Citi",
-    text: "Developed an update automation tool for creating update snapshots for the OpenLink Endur application. The tool was used by the team to automate the process of creating update snapshots, saving 10s of hours of manual work. Developed a node-wise XML comparison tool for comparing the XML Feeds of the Endur application's subcomponents.",
-    websites: [{ icon: globe, url: "https://www.citi.com/" }],
   },
 ];

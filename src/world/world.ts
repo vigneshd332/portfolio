@@ -5,6 +5,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Spaceship } from "./objects";
 import { loadEvents, loadSceneAssets } from "./loaders";
 
+const MAP_SIZE = 150000;
+
 let container: Element,
   camera: THREE.PerspectiveCamera,
   scene: THREE.Scene,
@@ -53,7 +55,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
 
   // Water
 
-  const waterGeometry = new THREE.PlaneGeometry(60000, 60000);
+  const waterGeometry = new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE);
 
   water = new Water(waterGeometry, {
     textureWidth: 512,
@@ -76,7 +78,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   // Skybox
   sun = new THREE.Vector3();
   const sky = new Sky();
-  sky.scale.setScalar(60000);
+  sky.scale.setScalar(MAP_SIZE);
   scene.add(sky);
 
   const skyUniforms = sky.material.uniforms;
