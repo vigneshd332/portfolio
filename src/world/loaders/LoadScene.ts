@@ -20,7 +20,14 @@ export async function loadSceneAssets(
   // Friendly Ships
   const friendlyShipSpawns = await getFriendlyShipSpawns();
   friendlyShipSpawns.forEach((spawn) => {
-    new Ship(scene, spawn.model, spawn.position, spawn.scale, spawn.rotation);
+    new Ship(
+      scene,
+      spawn.model,
+      spawn.position,
+      spawn.scale,
+      spawn.rotation,
+      spawn.name
+    );
   });
 
   // 3D Text
@@ -50,7 +57,8 @@ export async function loadSceneAssets(
         spawn.launch_delay,
         spawn.vtol,
         spawn.post_takeoff_action,
-        spawn.pre_takeoff_action
+        spawn.pre_takeoff_action,
+        spawn.name
       )
     );
   });

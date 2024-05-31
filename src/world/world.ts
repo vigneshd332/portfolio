@@ -11,10 +11,7 @@ let container: Element,
   camera: THREE.PerspectiveCamera,
   scene: THREE.Scene,
   renderer: THREE.WebGLRenderer,
-  controls: OrbitControls,
-  spaceship: Spaceship,
   water: Water,
-  sun: THREE.Vector3,
   rendered: boolean = false,
   updatables: Updatable[] = [];
 
@@ -24,16 +21,16 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   if (!container || rendered) return;
   rendered = true;
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ precision: "lowp", antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMapping = THREE.CineonToneMapping;
   container.appendChild(renderer.domElement);
 
   THREE.DefaultLoadingManager.onProgress = function (_item, loaded, _) {
     const progressBar = document.getElementById("LoaderText") as Element;
-    progressBar.innerHTML = `${loaded} / 57 objects loaded...`;
-    if (loaded === 57) setLoaded(true);
+    progressBar.innerHTML = `${loaded} / 74 objects loaded...`;
+    if (loaded === 74) setLoaded(true);
   };
 
   scene = new THREE.Scene();
@@ -45,13 +42,13 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
     40000
   );
 
-  controls = new OrbitControls(camera, renderer.domElement);
+  const controls = new OrbitControls(camera, renderer.domElement);
   controls.maxPolarAngle = Math.PI * 0.6;
   controls.minDistance = 40.0;
   controls.maxDistance = 150.0;
   controls.update();
 
-  spaceship = new Spaceship(scene, camera, controls);
+  const spaceship = new Spaceship(scene, camera, controls);
 
   // Water
 
@@ -76,7 +73,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   scene.add(water);
 
   // Skybox
-  sun = new THREE.Vector3();
+  const sun = new THREE.Vector3();
   const sky = new Sky();
   sky.scale.setScalar(MAP_SIZE);
   scene.add(sky);

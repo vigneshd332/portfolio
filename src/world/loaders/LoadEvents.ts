@@ -58,13 +58,15 @@ export function loadEvents(
   });
 
   const raycaster = new THREE.Raycaster();
-  const intersectIntersts = ["text", "icon"];
+  const intersectIntersts = ["text", "icon", "ship", "aircraft"]; // Interests to check for intersection for effects like hover etc
 
   window.addEventListener("mousemove", onMouseMove, false);
+
   let hoveredObject: InteractableMesh<
     THREE.BufferGeometry,
     THREE.Material
   > | null = null;
+
   function onMouseMove(event: MouseEvent) {
     const mousePointer = getMouseVector2(event, window);
 
@@ -77,16 +79,16 @@ export function loadEvents(
       true
     );
 
-    const objectList = getObjectsByName(intersections, intersectIntersts);
-    if (hoveredObject) {
+    const objectList = getObjectsByName(
+      intersections,
+      intersectIntersts
+    ) as InteractableMesh<THREE.BufferGeometry, THREE.Material>[];
+    if (hoveredObject && hoveredObject !== objectList[0]) {
       hoveredObject.offHover();
       hoveredObject = null;
     }
     if (!objectList.length) return;
-    hoveredObject = objectList[0] as InteractableMesh<
-      THREE.BufferGeometry,
-      THREE.Material
-    >;
+    hoveredObject = objectList[0];
     hoveredObject.onHover();
   }
 
@@ -102,12 +104,12 @@ export function loadEvents(
       true
     );
 
-    const objectList = getObjectsByName(intersections, intersectIntersts);
+    const objectList = getObjectsByName(
+      intersections,
+      intersectIntersts
+    ) as InteractableMesh<THREE.BufferGeometry, THREE.Material>[];
     if (!objectList.length) return;
-    const clickedObject = objectList[0] as InteractableMesh<
-      THREE.BufferGeometry,
-      THREE.Material
-    >;
+    const clickedObject = objectList[0];
     clickedObject.onClick();
   });
 }

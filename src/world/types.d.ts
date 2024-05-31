@@ -16,10 +16,12 @@ interface FriendlyShipSpawn {
   position: THREE.Vector3;
   scale: THREE.Vector3;
   rotation: THREE.Vector3;
+  name: string;
 }
 
 interface CarrierAircraftSpawn {
   model: THREE.Group;
+  name: string;
   position: THREE.Vector3;
   scale: THREE.Vector3;
   rotation: THREE.Vector3;

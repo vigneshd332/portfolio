@@ -47,13 +47,25 @@ export class Aircraft {
     _launch_delay: number = 0,
     vtol: boolean = false,
     _post_takeoff_action_callback: (this: Aircraft) => void = () => {},
-    _pre_takeoff_action_callback: (this: Aircraft) => void = () => {}
+    _pre_takeoff_action_callback: (this: Aircraft) => void = () => {},
+    name: string
   ) {
     const model = aircraftModel.clone();
     scene.add(model);
     model.position.set(_position.x, _position.y, _position.z);
     model.scale.set(_scale.x, _scale.y, _scale.z);
     model.rotation.set(_rotation.x, _rotation.y, _rotation.z);
+    model.traverse((child) => {
+      const interactableChild = child as InteractableMesh<
+        THREE.BufferGeometry,
+        THREE.MeshBasicMaterial
+      >;
+      interactableChild.name =
+        "aircraft-" + name + "-" + interactableChild.name;
+      interactableChild.onHover = () => {};
+      interactableChild.offHover = () => {};
+      interactableChild.onClick = () => {};
+    });
 
     this.aircraft = model;
     this.launch_time = new Date().getTime() + _launch_delay * 1000;

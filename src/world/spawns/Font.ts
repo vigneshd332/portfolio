@@ -18,7 +18,7 @@ export async function getFontSpawns(): Promise<FontSpawn[]> {
     {
       font: font,
       text: "EXPERIENCE",
-      position: new THREE.Vector3(300, 500, 5700),
+      position: new THREE.Vector3(300, 800, 5700),
       rotation: new THREE.Vector3(0, Math.PI, 0),
       onClick: () => {
         window.location.href = "/about#experience";

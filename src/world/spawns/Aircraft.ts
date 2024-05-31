@@ -11,6 +11,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
   return [
     {
       model: flankerModel,
+      name: "flanker",
       position: new THREE.Vector3(4900, 200, -1500),
       scale: new THREE.Vector3(20, 20, 20),
       rotation: new THREE.Vector3(0, Math.PI / 5, 0),
@@ -28,6 +29,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
     },
     {
       model: flankerModel,
+      name: "flanker",
       position: new THREE.Vector3(5350, 200, -100),
       scale: new THREE.Vector3(20, 20, 20),
       rotation: new THREE.Vector3(0, Math.PI / 5, 0),
@@ -45,6 +47,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
     },
     {
       model: flankerModel,
+      name: "flanker",
       position: new THREE.Vector3(5550, 200, -300),
       scale: new THREE.Vector3(20, 20, 20),
       rotation: new THREE.Vector3(0, Math.PI / 8, 0),
@@ -62,6 +65,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
     },
     {
       model: flankerModel,
+      name: "flanker",
       position: new THREE.Vector3(4700, 200, -1300),
       scale: new THREE.Vector3(20, 20, 20),
       rotation: new THREE.Vector3(0, Math.PI / 6, 0),
@@ -79,6 +83,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
     },
     {
       model: f35Model,
+      name: "f35",
       position: new THREE.Vector3(3900, 250, -2200),
       scale: new THREE.Vector3(1000, 1000, 1000),
       rotation: new THREE.Vector3(0, Math.PI / 6, 0),
@@ -96,6 +101,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
     },
     {
       model: f35Model,
+      name: "f35",
       position: new THREE.Vector3(4000, 250, -2900),
       scale: new THREE.Vector3(1000, 1000, 1000),
       rotation: new THREE.Vector3(0, Math.PI / 6, 0),
@@ -113,6 +119,7 @@ export async function getFriendlyCarrierAircraftSpawns(): Promise<
     },
     {
       model: f35Model,
+      name: "f35",
       position: new THREE.Vector3(4400, 250, -2200),
       scale: new THREE.Vector3(1000, 1000, 1000),
       rotation: new THREE.Vector3(0, Math.PI / 6, 0),
