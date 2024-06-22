@@ -1,11 +1,11 @@
 import * as THREE from "three";
-import { loadShipModel } from "../loaders";
+import { loadModel } from "../loaders";
 
 export async function getFriendlyShipSpawns(): Promise<FriendlyShipSpawn[]> {
-  const kirovModel = await loadShipModel("models/kirov/model.glb");
-  const shtormModel = await loadShipModel("models/shtorm/scene.gltf");
-  const akulaModel = await loadShipModel("models/akula/model.glb");
-  const burkeModel = await loadShipModel("models/burke/scene.gltf");
+  const kirovModel = await loadModel("models/kirov/model.glb");
+  const shtormModel = await loadModel("models/shtorm/model.glb");
+  const akulaModel = await loadModel("models/akula/model.glb");
+  const burkeModel = await loadModel("models/burke/model.glb");
 
   return [
     {

@@ -1,12 +1,12 @@
 import * as THREE from "three";
 import { Aircraft } from "../objects/Aircraft";
-import { loadF35Model, loadFlankerModel } from "../loaders/AircraftLoader";
+import { loadModel } from "../loaders";
 
 export async function getFriendlyCarrierAircraftSpawns(): Promise<
   CarrierAircraftSpawn[]
 > {
-  const flankerModel = await loadFlankerModel();
-  const f35Model = await loadF35Model();
+  const flankerModel = await loadModel("models/flanker/model.glb");
+  const f35Model = await loadModel("models/f35/model.glb");
 
   return [
     {

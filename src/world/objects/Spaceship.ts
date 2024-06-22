@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { GLTFLoader, GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { CameraControl } from "./CameraControl";
+import { loadModel } from "../loaders";
 
 interface spaceshipVelocity {
   translation: {
@@ -29,14 +29,14 @@ export class Spaceship {
     camera: THREE.PerspectiveCamera,
     controls: OrbitControls
   ) {
-    const loader = new GLTFLoader();
-    loader.load("models/spaceship/spaceship.gltf", (gltf: GLTF) => {
-      scene.add(gltf.scene);
-      gltf.scene.position.set(-3350, 1200, -7080);
-      gltf.scene.scale.set(0.008, 0.008, 0.008);
-      gltf.scene.rotation.set(0, 0, 0);
+    const spaceship = loadModel("models/spaceship/model.glb");
+    spaceship.then((model) => {
+      scene.add(model);
+      model.position.set(-3350, 1200, -7080);
+      model.scale.set(0.008, 0.008, 0.008);
+      model.rotation.set(0, 0, 0);
 
-      this.spaceship = gltf.scene;
+      this.spaceship = model;
       this.cameraControl = new CameraControl(camera);
       this.velocity = {
         translation: {

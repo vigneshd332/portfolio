@@ -1,16 +1,11 @@
 import * as THREE from "three";
-import {
-  loadGithubModel,
-  loadLinkedinModel,
-  loadPlatform1Model,
-  loadTwitterModel,
-} from "../loaders";
+import { loadModel } from "../loaders";
 
 export async function getSocialSpawns(): Promise<SocialSpawn[]> {
-  const githubModel = await loadGithubModel();
-  const twitterModel = await loadTwitterModel();
-  const linkedinModel = await loadLinkedinModel();
-  const platform1Model: THREE.Group = await loadPlatform1Model();
+  const githubModel = await loadModel("models/icons/github.glb");
+  const twitterModel = await loadModel("models/icons/twitter.glb");
+  const linkedinModel = await loadModel("models/icons/linkedin.glb");
+  const platform1Model = await loadModel("models/floating_platform/model.glb");
 
   return [
     {

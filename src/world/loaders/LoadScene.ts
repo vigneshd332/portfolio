@@ -6,15 +6,15 @@ import {
   getSocialSpawns,
 } from "../spawns";
 import { Aircraft } from "../objects/Aircraft";
-import { loadXQ6Model } from "./XQ6Loader";
 import { XQ6Platform, Ship, FontInteractive, Platform } from "../objects";
+import { loadModel } from "./ModelLoader";
 
 export async function loadSceneAssets(
   scene: THREE.Scene
 ): Promise<Updatable[]> {
   const updateables: Updatable[] = [];
 
-  const xq6PlatformModel = await loadXQ6Model();
+  const xq6PlatformModel = await loadModel("models/xq6_platform/model.glb");
   new XQ6Platform(scene, xq6PlatformModel, new THREE.Vector3(0, 100, 1000));
 
   // Friendly Ships
