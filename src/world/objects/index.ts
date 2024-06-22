@@ -5,4 +5,4 @@ export { XQ6Platform } from "./XQ6Platform";
 export { FontInteractive } from "./FontInteractive";
 export { Icon } from "./Icon";
 export { CameraControl } from "./CameraControl";
-export { Spaceship } from "./Spaceship";
+export { Player } from "./Player";

@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Water } from "three/examples/jsm/objects/Water.js";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Spaceship } from "./objects";
+import { Player } from "./objects";
 import { loadEvents, loadSceneAssets } from "./loaders";
 
 const MAP_SIZE = 150000;
@@ -29,8 +29,8 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
 
   THREE.DefaultLoadingManager.onProgress = function (_item, loaded, _) {
     const progressBar = document.getElementById("LoaderText") as Element;
-    progressBar.innerHTML = `${loaded} / 67 objects loaded...`;
-    if (loaded === 67) setLoaded(true);
+    progressBar.innerHTML = `${loaded} / 71 objects loaded...`;
+    if (loaded === 71) setLoaded(true);
   };
 
   scene = new THREE.Scene();
@@ -48,7 +48,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   controls.maxDistance = 150.0;
   controls.update();
 
-  const spaceship = new Spaceship(scene, camera, controls);
+  const player = new Player(scene, camera, controls);
 
   // Water
 
@@ -104,10 +104,10 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
 
   // Assets
   updatables = await loadSceneAssets(scene);
-  updatables.push(spaceship);
+  updatables.push(player);
 
   // Events
-  loadEvents(scene, camera, renderer, spaceship);
+  loadEvents(scene, camera, renderer, player);
 
   // Animate
   animate();

@@ -4,7 +4,7 @@ import {
   checkRayIntersections,
   getObjectsByName,
 } from "../helpers";
-import { Spaceship } from "../objects";
+import { Player } from "../objects";
 
 function onWindowResize(
   camera: THREE.PerspectiveCamera,
@@ -20,7 +20,7 @@ export function loadEvents(
   scene: THREE.Scene,
   camera: THREE.PerspectiveCamera,
   renderer: THREE.WebGLRenderer,
-  spaceship: Spaceship
+  player: Player
 ) {
   window.addEventListener("resize", () => {
     onWindowResize(camera, renderer);
@@ -28,15 +28,15 @@ export function loadEvents(
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "w" || e.key === "ArrowUp")
-      spaceship.velocity.translation.z = 20;
+      player.velocity.translation.z = 20;
     if (e.key === "s" || e.key === "ArrowDown")
-      spaceship.velocity.translation.z = -20;
+      player.velocity.translation.z = -20;
     if (e.key === "a" || e.key === "ArrowLeft")
-      spaceship.velocity.rotation.y = 0.02;
+      player.velocity.rotation.y = 0.02;
     if (e.key === "d" || e.key === "ArrowRight")
-      spaceship.velocity.rotation.y = -0.02;
-    if (e.key === "r") spaceship.velocity.translation.y = 10;
-    if (e.key === "f") spaceship.velocity.translation.y = -10;
+      player.velocity.rotation.y = -0.02;
+    if (e.key === "r") player.velocity.translation.y = 10;
+    if (e.key === "f") player.velocity.translation.y = -10;
   });
 
   window.addEventListener("keyup", (e) => {
@@ -46,15 +46,15 @@ export function loadEvents(
       e.key === "ArrowDown" ||
       e.key === "s"
     )
-      spaceship.velocity.translation.z = 0;
+      player.velocity.translation.z = 0;
     if (
       e.key === "a" ||
       e.key === "ArrowLeft" ||
       e.key === "ArrowRight" ||
       e.key === "d"
     )
-      spaceship.velocity.rotation.y = 0;
-    if (e.key === "r" || e.key === "f") spaceship.velocity.translation.y = 0;
+      player.velocity.rotation.y = 0;
+    if (e.key === "r" || e.key === "f") player.velocity.translation.y = 0;
   });
 
   const raycaster = new THREE.Raycaster();
