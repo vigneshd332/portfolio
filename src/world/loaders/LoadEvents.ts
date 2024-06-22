@@ -27,38 +27,59 @@ export function loadEvents(
   });
 
   window.addEventListener("keydown", (e) => {
-    if (e.key === "w" || e.key === "ArrowUp")
-      player.velocity.translation.z = 20;
-    if (e.key === "s" || e.key === "ArrowDown")
-      player.velocity.translation.z = -20;
-    if (e.key === "a" || e.key === "ArrowLeft")
-      player.velocity.rotation.y = 0.02;
-    if (e.key === "d" || e.key === "ArrowRight")
-      player.velocity.rotation.y = -0.02;
-    if (e.key === "r") player.velocity.translation.y = 10;
-    if (e.key === "f") player.velocity.translation.y = -10;
+    switch (e.key) {
+      case "w":
+      case "ArrowUp":
+        if (player.velocity.translation.z < player.maxVelocity)
+          player.velocity.translation.z += 0.5;
+        break;
+      case "s":
+      case "ArrowDown":
+        if (player.velocity.translation.z > 0)
+          player.velocity.translation.z -= 0.5;
+        break;
+      case "a":
+      case "ArrowLeft":
+        if (player.velocity.rotation.y < player.maxRotationVelocityYaw)
+          player.velocity.rotation.y += 0.02;
+        if (player.velocity.rotation.z > -player.maxRotationRoll)
+          player.velocity.rotation.z -= 0.03;
+        break;
+      case "d":
+      case "ArrowRight":
+        if (player.velocity.rotation.y > -player.maxRotationVelocityYaw)
+          player.velocity.rotation.y -= 0.02;
+        if (player.velocity.rotation.z < player.maxRotationRoll)
+          player.velocity.rotation.z += 0.03;
+        break;
+      case "r":
+        player.velocity.translation.y = 10;
+        break;
+      case "f":
+        player.velocity.translation.y = -10;
+        break;
+    }
   });
 
   window.addEventListener("keyup", (e) => {
-    if (
-      e.key === "w" ||
-      e.key === "ArrowUp" ||
-      e.key === "ArrowDown" ||
-      e.key === "s"
-    )
-      player.velocity.translation.z = 0;
-    if (
-      e.key === "a" ||
-      e.key === "ArrowLeft" ||
-      e.key === "ArrowRight" ||
-      e.key === "d"
-    )
-      player.velocity.rotation.y = 0;
-    if (e.key === "r" || e.key === "f") player.velocity.translation.y = 0;
+    switch (e.key) {
+      case "a":
+      case "ArrowLeft":
+      case "ArrowRight":
+      case "d":
+        player.turnRestoreStatus.yaw = true;
+        player.turnRestoreStatus.roll = true;
+        break;
+      case "r":
+      case "f":
+        player.velocity.translation.y = 0;
+        break;
+    }
   });
 
   const raycaster = new THREE.Raycaster();
-  const intersectIntersts = ["text", "icon", "ship", "aircraft"]; // Interests to check for intersection for effects like hover etc
+  // Interests to check for intersection for effects like hover etc
+  const intersectIntersts = ["text", "icon", "ship", "aircraft"];
 
   window.addEventListener("mousemove", onMouseMove, false);
 

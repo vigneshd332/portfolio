@@ -2,16 +2,17 @@ import { PerspectiveCamera, Vector3 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export class CameraControl {
-  _camera: PerspectiveCamera;
+  camera: PerspectiveCamera;
+  controls: OrbitControls;
 
-  constructor(camera: PerspectiveCamera) {
-    this._camera = camera;
+  constructor(camera: PerspectiveCamera, controls: OrbitControls) {
+    this.camera = camera;
+    this.controls = controls;
   }
 
-  update(controls: OrbitControls, position: Vector3) {
-    if (!this._camera) return;
+  update(position: Vector3) {
     const cameraPosition = position.clone();
-    controls.target = cameraPosition.add(new Vector3(0, 60, 0));
-    controls.update();
+    this.controls.target = cameraPosition.add(new Vector3(0, 60, 0));
+    this.controls.update();
   }
 }
