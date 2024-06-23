@@ -1,4 +1,4 @@
-import reactIcon from "../../../assets/react-icon.png";
+import reactIcon from "../../../assets/react-icon.webp";
 import threeIcon from "../../../assets/threejs.svg";
 import styles from "./Footer.module.css";
 

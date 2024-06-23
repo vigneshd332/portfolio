@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./WorldUI.module.css";
-import wasd from "../../../assets/wasd.png";
-import arrows from "../../../assets/arrows.png";
-import rkey from "../../../assets/r.png";
-import fkey from "../../../assets/f.png";
-import uparrow from "../../../assets/upArrow.png";
+import wasd from "../../../assets/wasd.webp";
+import arrows from "../../../assets/arrows.webp";
+import rkey from "../../../assets/r.webp";
+import fkey from "../../../assets/f.webp";
+import uparrow from "../../../assets/upArrow.webp";
 
 const WorldUI = (): JSX.Element => {
   const navigate = useNavigate();

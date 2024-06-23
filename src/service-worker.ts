@@ -49,6 +49,9 @@ registerRoute(
       url.pathname.endsWith(".gltf") ||
       url.pathname.endsWith(".bin") ||
       url.pathname.endsWith(".jpg") ||
+      url.pathname.endsWith(".json") ||
+      url.pathname.endsWith(".woff") ||
+      url.pathname.endsWith(".woff2") ||
       url.pathname.endsWith(".jpeg")),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({

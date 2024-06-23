@@ -58,7 +58,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
     textureWidth: 512,
     textureHeight: 512,
     waterNormals: new THREE.TextureLoader().load(
-      "textures/waternormals.jpg",
+      "textures/waternormals.webp",
       function (texture) {
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
       }
