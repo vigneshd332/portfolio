@@ -54,9 +54,13 @@ export function loadEvents(
         break;
       case "r":
         player.velocity.translation.y = 10;
+        // if (player.velocity.rotation.x > -player.maxRotationPitch)
+        //   player.velocity.rotation.x -= 0.03;
         break;
       case "f":
         player.velocity.translation.y = -10;
+        // if (player.velocity.rotation.x < player.maxRotationPitch)
+        //   player.velocity.rotation.x += 0.03;
         break;
     }
   });
@@ -73,6 +77,7 @@ export function loadEvents(
       case "r":
       case "f":
         player.velocity.translation.y = 0;
+        //player.turnRestoreStatus.pitch = true;
         break;
     }
   });

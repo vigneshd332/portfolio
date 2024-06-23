@@ -32,11 +32,15 @@ export class Player {
     yaw: false,
     roll: false,
   };
+  minHeight: number = 50;
+  maxHeight: number = 4000;
   maxVelocity: number = 20;
   maxRotationVelocityYaw: number = 0.02;
   maxRotationRoll: number = 0.4;
+  maxRotationPitch: number = 0.4;
   currentRoll: number = 0;
   currentYaw: number = 0;
+  currentPitch: number = 0;
 
   constructor(
     scene: THREE.Scene,
@@ -72,21 +76,28 @@ export class Player {
   update() {
     if (!this.player) return;
 
-    // Movement and Rotation
+    // Movement
     this.player.translateX(this.velocity.translation.x);
+    this.player.translateZ(this.velocity.translation.z);
     if (
-      !(this.player.position.y < 50 && this.velocity.translation.y < 0) &&
-      !(this.player.position.y > 4000 && this.velocity.translation.y > 0)
+      !(
+        this.player.position.y < this.minHeight &&
+        this.velocity.translation.y < 0
+      ) &&
+      !(
+        this.player.position.y > this.maxHeight &&
+        this.velocity.translation.y > 0
+      )
     )
       this.player.translateY(this.velocity.translation.y);
 
-    this.player.translateZ(this.velocity.translation.z);
-    this.player.rotateX(this.velocity.rotation.x);
+    // Rotation Y (Yaw)
     this.player.rotateOnWorldAxis(
       new THREE.Vector3(0, 1, 0),
       this.velocity.rotation.y
     );
 
+    // Rotation Z (Roll)
     this.currentRoll += this.velocity.rotation.z;
     this.currentRoll =
       this.currentRoll > this.maxRotationRoll
@@ -97,6 +108,18 @@ export class Player {
         ? -this.maxRotationRoll
         : this.currentRoll;
     this.player.rotation.z = this.currentRoll;
+
+    // Rotation X (Pitch)
+    // this.currentPitch += this.velocity.rotation.x;
+    // this.currentPitch =
+    //   this.currentPitch > this.maxRotationPitch
+    //     ? this.maxRotationPitch
+    //     : this.currentPitch;
+    // this.currentPitch =
+    //   this.currentPitch < -this.maxRotationPitch
+    //     ? -this.maxRotationPitch
+    //     : this.currentPitch;
+    // this.player.rotation.x = this.currentPitch;
 
     // These fixes are needed because THREE.js inverts the axes beyong -90 and 90 degrees of rotations on the world axis
     this.currentYaw += this.velocity.rotation.y;
@@ -116,7 +139,18 @@ export class Player {
 
   restoreTurnDefaults() {
     if (this.turnRestoreStatus.pitch) {
-      // TODO: Implement pitch restoration
+      // this.velocity.rotation.x = 0;
+      // if (this.currentPitch > 0)
+      //   if (this.currentPitch < 0.02) {
+      //     this.player.rotation.x -= this.currentPitch;
+      //     this.currentPitch = 0;
+      //   } else this.currentPitch -= 0.02;
+      // else if (this.currentPitch < 0)
+      //   if (this.currentPitch > -0.02) {
+      //     this.player.rotation.x -= this.currentPitch;
+      //     this.currentPitch = 0;
+      //   } else this.currentPitch += 0.02;
+      // else this.turnRestoreStatus.pitch = false;
     }
     if (this.turnRestoreStatus.yaw) {
       if (this.velocity.rotation.y > 0)
@@ -131,12 +165,12 @@ export class Player {
         if (this.currentRoll < 0.02) {
           this.player.rotation.z -= this.currentRoll;
           this.currentRoll = 0;
-        } else this.currentRoll = this.currentRoll - 0.02;
+        } else this.currentRoll -= 0.02;
       else if (this.currentRoll < 0)
         if (this.currentRoll > -0.02) {
           this.player.rotation.z -= this.currentRoll;
           this.currentRoll = 0;
-        } else this.currentRoll = this.currentRoll + 0.02;
+        } else this.currentRoll += 0.02;
       else this.turnRestoreStatus.roll = false;
     }
   }
