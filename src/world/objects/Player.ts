@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CameraControl } from "./CameraControl";
 import { loadModel } from "../loaders";
+import Radar from "../tracking";
 
 interface playerVelocity {
   translation: {
@@ -27,13 +28,14 @@ export class Player {
   velocity!: playerVelocity;
   cameraControl!: CameraControl;
   controls: OrbitControls;
+  radar: Radar;
   turnRestoreStatus: TurnRestoreStatus = {
     pitch: false,
     yaw: false,
     roll: false,
   };
   minHeight: number = 50;
-  maxHeight: number = 4000;
+  maxHeight: number = 20000;
   maxVelocity: number = 20;
   maxRotationVelocityYaw: number = 0.02;
   maxRotationRoll: number = 0.4;
@@ -41,18 +43,26 @@ export class Player {
   currentRoll: number = 0;
   currentYaw: number = 0;
   currentPitch: number = 0;
+  setHUDData: (data: HUDData) => void = () => {};
 
   constructor(
     scene: THREE.Scene,
     camera: THREE.PerspectiveCamera,
-    controls: OrbitControls
+    controls: OrbitControls,
+    setHUDData: (data: HUDData) => void
   ) {
+    this.setHUDData = setHUDData;
+
     const player = loadModel("models/u2/model.glb");
     player.then((model) => {
       scene.add(model);
       model.position.set(-3350, 1200, -7080);
-      model.scale.set(3, 3, 3);
+      model.scale.set(5, 5, 5);
       model.rotation.set(0, 0, 0);
+
+      model.traverse((child) => {
+        child.name = "player-" + child.name;
+      });
 
       this.player = model;
       this.cameraControl = new CameraControl(camera, controls);
@@ -71,6 +81,51 @@ export class Player {
     });
 
     this.controls = controls;
+    this.radar = new Radar(
+      scene,
+      document.getElementById("radar-canvas") as HTMLCanvasElement,
+      this
+    );
+  }
+
+  private restoreTurnDefaults() {
+    if (this.turnRestoreStatus.pitch) {
+      // this.velocity.rotation.x = 0;
+      // if (this.currentPitch > 0)
+      //   if (this.currentPitch < 0.02) {
+      //     this.player.rotation.x -= this.currentPitch;
+      //     this.currentPitch = 0;
+      //   } else this.currentPitch -= 0.02;
+      // else if (this.currentPitch < 0)
+      //   if (this.currentPitch > -0.02) {
+      //     this.player.rotation.x -= this.currentPitch;
+      //     this.currentPitch = 0;
+      //   } else this.currentPitch += 0.02;
+      // else this.turnRestoreStatus.pitch = false;
+    }
+    if (this.turnRestoreStatus.yaw) {
+      if (this.velocity.rotation.y > 0)
+        this.velocity.rotation.y = Math.round(this.velocity.rotation.y - 0.002);
+      else if (this.velocity.rotation.y < 0)
+        this.velocity.rotation.y = Math.round(this.velocity.rotation.y + 0.002);
+      else this.turnRestoreStatus.yaw = false;
+    }
+    if (this.turnRestoreStatus.roll) {
+      this.velocity.rotation.z = 0;
+      if (this.currentRoll > 0)
+        if (this.currentRoll < 0.02) {
+          this.player.rotation.z -= this.currentRoll;
+          this.currentRoll = 0;
+          this.turnRestoreStatus.roll = false;
+        } else this.currentRoll -= 0.02;
+      else if (this.currentRoll < 0)
+        if (this.currentRoll > -0.02) {
+          this.player.rotation.z -= this.currentRoll;
+          this.currentRoll = 0;
+          this.turnRestoreStatus.roll = false;
+        } else this.currentRoll += 0.02;
+      else this.turnRestoreStatus.roll = false;
+    }
   }
 
   update() {
@@ -135,43 +190,18 @@ export class Player {
 
     this.restoreTurnDefaults();
     this.cameraControl.update(this.player.position);
-  }
-
-  restoreTurnDefaults() {
-    if (this.turnRestoreStatus.pitch) {
-      // this.velocity.rotation.x = 0;
-      // if (this.currentPitch > 0)
-      //   if (this.currentPitch < 0.02) {
-      //     this.player.rotation.x -= this.currentPitch;
-      //     this.currentPitch = 0;
-      //   } else this.currentPitch -= 0.02;
-      // else if (this.currentPitch < 0)
-      //   if (this.currentPitch > -0.02) {
-      //     this.player.rotation.x -= this.currentPitch;
-      //     this.currentPitch = 0;
-      //   } else this.currentPitch += 0.02;
-      // else this.turnRestoreStatus.pitch = false;
-    }
-    if (this.turnRestoreStatus.yaw) {
-      if (this.velocity.rotation.y > 0)
-        this.velocity.rotation.y = Math.round(this.velocity.rotation.y - 0.002);
-      else if (this.velocity.rotation.y < 0)
-        this.velocity.rotation.y = Math.round(this.velocity.rotation.y + 0.002);
-      else this.turnRestoreStatus.yaw = false;
-    }
-    if (this.turnRestoreStatus.roll) {
-      this.velocity.rotation.z = 0;
-      if (this.currentRoll > 0)
-        if (this.currentRoll < 0.02) {
-          this.player.rotation.z -= this.currentRoll;
-          this.currentRoll = 0;
-        } else this.currentRoll -= 0.02;
-      else if (this.currentRoll < 0)
-        if (this.currentRoll > -0.02) {
-          this.player.rotation.z -= this.currentRoll;
-          this.currentRoll = 0;
-        } else this.currentRoll += 0.02;
-      else this.turnRestoreStatus.roll = false;
-    }
+    this.radar.update();
+    this.setHUDData({
+      name: "Lockheed U-2",
+      speed: Math.round(
+        (Math.sqrt(
+          this.velocity.translation.x ** 2 + this.velocity.translation.z ** 2
+        ) *
+          600) /
+          this.maxVelocity
+      ),
+      altitude: Math.round(this.player.position.y),
+      roll: Math.round((this.currentRoll * 180) / Math.PI),
+    });
   }
 }

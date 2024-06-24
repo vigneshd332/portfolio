@@ -15,7 +15,10 @@ let container: Element,
   rendered: boolean = false,
   updatables: Updatable[] = [];
 
-export default async function init(setLoaded: (loaded: boolean) => void) {
+export default async function init(
+  setLoaded: (loaded: boolean) => void,
+  setHUDData: (data: HUDData) => void
+) {
   container = document.getElementById("world") as Element;
 
   if (!container || rendered) return;
@@ -48,7 +51,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   controls.maxDistance = 150.0;
   controls.update();
 
-  const player = new Player(scene, camera, controls);
+  const player = new Player(scene, camera, controls, setHUDData);
 
   // Water
 
@@ -85,7 +88,7 @@ export default async function init(setLoaded: (loaded: boolean) => void) {
   skyUniforms["mieDirectionalG"].value = 0.8;
 
   const parameters = {
-    elevation: 8,
+    elevation: 10,
     azimuth: 40,
   };
 

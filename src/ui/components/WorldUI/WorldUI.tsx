@@ -12,7 +12,7 @@ const WorldUI = (): JSX.Element => {
     <div className={styles.worldUI}>
       <div className={styles.worldUINavContainer}>
         <div className={styles.worldUINav}>
-          <h2 className={styles.theChosenOne}>Vignesh's World</h2>
+          <h2 className={styles.theChosenOne}>Vignesh Duraisamy</h2>
           <div className={styles.navButtons}>
             <button
               className={styles.navButton}
@@ -37,9 +37,9 @@ const WorldUI = (): JSX.Element => {
         <div className={styles.instructions}>
           <div className={styles.instructionListItem}>
             <p>
-              • This is supposed to be an interactive portfolio. Its work in
-              progress, but feel free to have a look around. To see a simpler
-              version click the about button.
+              • This is an interactive portfolio. Its work in progress, but feel
+              free to have a look around. To see a simpler version click the
+              about button.
             </p>
           </div>
           <div className={styles.instructionListItem}>
@@ -63,7 +63,7 @@ const WorldUI = (): JSX.Element => {
             <p>• Click on text and icons to interact .</p>
           </div>
           <div className={styles.instructionListItem}>
-            <p>Welcome again :&#41;</p>
+            <p>Have a look :&#41;</p>
           </div>
         </div>
         <div className={styles.startMessage}>

@@ -7,7 +7,7 @@ import github from "../../../assets/github.svg";
 export const cardData: CardData[] = [
   {
     img: citi,
-    title: "Citi",
+    title: "Citi - Internship",
     text: "Developed an update automation tool for creating update snapshots for the OpenLink Endur application. The tool was used by the team to automate the process of creating update snapshots, saving hours of manual work. Developed a node-wise XML comparison tool for comparing the XML Feeds of the Endur application's subcomponents.",
     websites: [{ icon: globe, url: "https://www.citi.com/" }],
   },

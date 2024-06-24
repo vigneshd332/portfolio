@@ -25,6 +25,9 @@ export class Platform {
     );
     model.scale.set(2.5, 2.5, 2.5);
     model.rotation.set(0, Math.PI, 0);
+    model.traverse((child) => {
+      child.name = "radar-platform-" + child.name;
+    });
 
     this.platform = model;
     this.icon =

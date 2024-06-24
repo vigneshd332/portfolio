@@ -98,6 +98,9 @@
   letter-spacing: 1px;
   max-width: min(850px, var(--margin-provider));
   line-height: 1.7rem;
+  max-height: 55vh;
+  overflow: auto;
+  margin-bottom: 2rem;
 }
 
 .links {
@@ -118,10 +121,29 @@
   margin-right: 0.5rem;
 }
 
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.socialIcon {
+  height: auto;
+  width: 2rem;
+  filter: invert(1);
+  transition: var(--transition-fast);
+}
+
+.socialIcon:hover {
+  transition: var(--transition-slow);
+  filter: invert(0.7);
+}
+
 @supports (backdrop-filter: blur(2px)) {
   .About {
     backdrop-filter: blur(2px);
-    background-color: #00000077;
+    background-color: #000000cc;
   }
 }
 
@@ -140,6 +162,9 @@
   }
   .navTitle {
     font-size: 1.5rem;
+  }
+  .socials {
+    width: 80%;
   }
 }
 

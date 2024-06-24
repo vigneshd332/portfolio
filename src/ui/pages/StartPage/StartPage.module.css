@@ -1,0 +1,89 @@
+.startPageWrapper {
+  background-color: black;
+  background: -moz-radial-gradient(white 15%, transparent 16%),
+    -moz-radial-gradient(white 15%, transparent 16%), black;
+  background: -webkit-radial-gradient(white 15%, transparent 16%),
+    -webkit-radial-gradient(white 15%, transparent 16%), black;
+  background-position: 0 0, 15px 15px;
+
+  -webkit-background-size: 30px 30px;
+  -moz-background-size: 30px 30px;
+  background-size: 30px 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.startPage {
+  width: 100%;
+  height: 100%;
+  background-color: #000000dd;
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
+.redPillOrBluePill {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 80%;
+  width: 40%;
+  height: auto;
+  transition: var(--transition-fast);
+}
+
+.img {
+  border-radius: 15px;
+  width: 100%;
+  height: auto;
+}
+
+.imgAbout {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.card:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: var(--transition-slow);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .redPillOrBluePill {
+    height: 80%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    font-size: 1.5rem;
+  }
+  .card {
+    width: 80%;
+  }
+}

@@ -3,10 +3,17 @@ import { useNavigate } from "react-router-dom";
 import WorldUI from "../../components/WorldUI/WorldUI";
 import styles from "./WorldHome.module.css";
 import init from "../../../world/world";
+import PlayerHUD from "../../components/PlayerHUD/PlayerHUD";
 
 const WorldHome = (): JSX.Element => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [gameStart, setGameStart] = useState<boolean>(false);
+  const [hudData, setHUDData] = useState<HUDData>({
+    name: "",
+    speed: 0,
+    altitude: 0,
+    roll: 0,
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,8 +27,8 @@ const WorldHome = (): JSX.Element => {
   }, [loaded]);
 
   useEffect(() => {
-    init(setLoaded);
-    console.log("App initialized");
+    init(setLoaded, setHUDData);
+    console.log("THREE.js App Initialized");
   }, []);
 
   return (
@@ -38,11 +45,12 @@ const WorldHome = (): JSX.Element => {
               className={styles.redirectButton}
               onClick={() => navigate("/about")}
             >
-              Click here to view a simpler page
+              Click here to view a simpler version
             </button>
           </div>
         )}
       </div>
+      <PlayerHUD gameStart={gameStart} hudData={hudData} />
       {loaded && !gameStart && (
         <div className={styles.worldUIContainer}>
           <WorldUI />

@@ -21,7 +21,8 @@ export class Ship {
         THREE.BufferGeometry,
         THREE.MeshBasicMaterial
       >;
-      interactableChild.name = "ship-" + name + "-" + interactableChild.name;
+      interactableChild.name =
+        "radar-ship-" + name + "-" + interactableChild.name;
       interactableChild.onHover = () => {};
       interactableChild.offHover = () => {};
       interactableChild.onClick = () => {};

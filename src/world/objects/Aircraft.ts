@@ -61,7 +61,7 @@ export class Aircraft {
         THREE.MeshBasicMaterial
       >;
       interactableChild.name =
-        "aircraft-" + name + "-" + interactableChild.name;
+        "radar-aircraft-" + name + "-" + interactableChild.name;
       interactableChild.onHover = () => {};
       interactableChild.offHover = () => {};
       interactableChild.onClick = () => {};
