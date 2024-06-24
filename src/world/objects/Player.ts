@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CameraControl } from "./CameraControl";
 import { loadModel } from "../loaders";
 import Radar from "../tracking";
+import { PI_BY_TWO, RADIANS_TO_DEGREES, TWO_PI } from "../helpers/constants";
 
 interface playerVelocity {
   translation: {
@@ -44,6 +45,7 @@ export class Player {
   currentYaw: number = 0;
   currentPitch: number = 0;
   setHUDData: (data: HUDData) => void = () => {};
+  preComputedConstants: { [key: string]: number } = {};
 
   constructor(
     scene: THREE.Scene,
@@ -53,6 +55,7 @@ export class Player {
   ) {
     this.setHUDData = setHUDData;
 
+    this.preComputedConstants.VELOCITY_TO_KMPH = 600 / this.maxVelocity;
     const player = loadModel("models/u2/model.glb");
     player.then((model) => {
       scene.add(model);
@@ -178,12 +181,12 @@ export class Player {
 
     // These fixes are needed because THREE.js inverts the axes beyong -90 and 90 degrees of rotations on the world axis
     this.currentYaw += this.velocity.rotation.y;
-    const directionIdentifier = this.currentYaw % (2 * Math.PI);
+    const directionIdentifier = this.currentYaw % TWO_PI;
+
     if (
-      ((3 * Math.PI) / 2 > directionIdentifier &&
-        directionIdentifier > Math.PI / 2) ||
-      (directionIdentifier > (-3 * Math.PI) / 2 &&
-        directionIdentifier < -Math.PI / 2)
+      (3 * PI_BY_TWO > directionIdentifier &&
+        directionIdentifier > PI_BY_TWO) ||
+      (directionIdentifier > -3 * PI_BY_TWO && directionIdentifier < -PI_BY_TWO)
     ) {
       this.player.rotation.z += Math.PI;
     }
@@ -194,14 +197,10 @@ export class Player {
     this.setHUDData({
       name: "Lockheed U-2",
       speed: Math.round(
-        (Math.sqrt(
-          this.velocity.translation.x ** 2 + this.velocity.translation.z ** 2
-        ) *
-          600) /
-          this.maxVelocity
+        this.velocity.translation.z * this.preComputedConstants.VELOCITY_TO_KMPH
       ),
       altitude: Math.round(this.player.position.y),
-      roll: Math.round((this.currentRoll * 180) / Math.PI),
+      roll: Math.round(this.currentRoll * RADIANS_TO_DEGREES),
     });
   }
 }

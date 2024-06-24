@@ -52,6 +52,7 @@ registerRoute(
       url.pathname.endsWith(".json") ||
       url.pathname.endsWith(".woff") ||
       url.pathname.endsWith(".woff2") ||
+      url.pathname.endsWith(".wasm") ||
       url.pathname.endsWith(".jpeg")),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({

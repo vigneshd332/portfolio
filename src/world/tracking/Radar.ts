@@ -1,6 +1,7 @@
 import { Player } from "../objects";
 import radarImg from "../../assets/radar.webp";
 import * as THREE from "three";
+import { DEGREES_TO_RADIANS, PI_BY_THREE, TWO_PI } from "../helpers/constants";
 
 export class Radar {
   scene: THREE.Scene;
@@ -11,6 +12,7 @@ export class Radar {
   currentSweepAngle: number = 0;
   maxRadarDistance: number = 10000;
   currentFrame: number = 0;
+  preComputedConstants: { [key: string]: number } = {};
 
   constructor(scene: THREE.Scene, canvas: HTMLCanvasElement, player: Player) {
     this.scene = scene;
@@ -24,6 +26,9 @@ export class Radar {
     this.canvas.style.width = canvasStyle.width;
     this.canvas.style.height = canvasStyle.height;
     this.radarImg.src = radarImg;
+
+    this.preComputedConstants.HALF_CANVAS_HEIGHT = this.canvas.height / 2;
+    this.preComputedConstants.HALF_CANVAS_WIDTH = this.canvas.width / 2;
   }
 
   update() {
@@ -40,23 +45,23 @@ export class Radar {
       this.canvas.height
     );
 
-    const radarTrueRadius = this.canvas.width / 2 - 5;
+    const radarTrueRadius = this.preComputedConstants.HALF_CANVAS_WIDTH - 5;
 
     // Radar Gradient BG Effect
     this.canvasContext.beginPath();
     this.canvasContext.arc(
-      this.canvas.width / 2,
-      this.canvas.height / 2,
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_HEIGHT,
       radarTrueRadius,
       0,
-      Math.PI * 2
+      TWO_PI
     );
     const gradient = this.canvasContext.createRadialGradient(
-      this.canvas.width / 2,
-      this.canvas.height / 2,
-      this.canvas.width / 2,
-      this.canvas.width / 2,
-      this.canvas.height / 2,
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_HEIGHT,
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_HEIGHT,
       0
     );
     gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
@@ -67,18 +72,20 @@ export class Radar {
 
     // Moving radar arc gradient trail effect
     this.canvasContext.beginPath();
-    const angle = this.currentSweepAngle % (Math.PI * 2);
+    const angle = this.currentSweepAngle % TWO_PI;
 
     // calculate gradient line based on angle
     const x2 =
-      this.canvas.width / 2 + Math.cos(angle) * (this.canvas.width / 2);
+      this.preComputedConstants.HALF_CANVAS_WIDTH +
+      Math.cos(angle) * this.preComputedConstants.HALF_CANVAS_WIDTH;
     const y2 =
-      this.canvas.height / 2 + Math.sin(angle) * (this.canvas.height / 2);
+      this.preComputedConstants.HALF_CANVAS_HEIGHT / 2 +
+      Math.sin(angle) * this.preComputedConstants.HALF_CANVAS_HEIGHT;
 
     // create and render gradient
     const arcGradient = this.canvasContext.createLinearGradient(
-      this.canvas.width / 2,
-      this.canvas.height / 2,
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_HEIGHT,
       x2,
       y2
     );
@@ -88,21 +95,27 @@ export class Radar {
     this.canvasContext.fillStyle = arcGradient;
 
     this.canvasContext.arc(
-      this.canvas.width / 2,
-      this.canvas.height / 2,
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_HEIGHT,
       radarTrueRadius,
-      (0 + this.currentSweepAngle) % (Math.PI * 2),
-      ((2 * Math.PI) / 3 + this.currentSweepAngle) % (Math.PI * 2),
+      (0 + this.currentSweepAngle) % TWO_PI,
+      (2 * PI_BY_THREE + this.currentSweepAngle) % TWO_PI,
       false
     );
-    this.canvasContext.lineTo(this.canvas.width / 2, this.canvas.height / 2);
+    this.canvasContext.lineTo(
+      this.preComputedConstants.HALF_CANVAS_WIDTH,
+      this.preComputedConstants.HALF_CANVAS_HEIGHT
+    );
     this.canvasContext.fill();
     this.canvasContext.closePath();
-    this.currentSweepAngle += (Math.PI / 180) * 2;
+    this.currentSweepAngle += DEGREES_TO_RADIANS * 2;
 
     // White Player Dot
     this.drawBlimp(
-      new THREE.Vector2(this.canvas.width / 2, this.canvas.height / 2),
+      new THREE.Vector2(
+        this.preComputedConstants.HALF_CANVAS_WIDTH,
+        this.preComputedConstants.HALF_CANVAS_HEIGHT
+      ),
       "white"
     );
 
@@ -114,7 +127,6 @@ export class Radar {
           (target.position.x - this.player.player.position.x) ** 2
       );
       if (distance < this.maxRadarDistance) {
-        // calculate angle based on x and z coordinates only without a tan function
         const angle =
           Math.atan2(
             target.position.z - this.player.player.position.z,
@@ -123,12 +135,12 @@ export class Radar {
           this.player.currentYaw +
           Math.PI;
         const x =
-          this.canvas.width / 2 +
+          this.preComputedConstants.HALF_CANVAS_WIDTH +
           Math.cos(angle) *
             (distance / this.maxRadarDistance) *
             radarTrueRadius;
         const y =
-          this.canvas.height / 2 +
+          this.preComputedConstants.HALF_CANVAS_HEIGHT +
           Math.sin(angle) *
             (distance / this.maxRadarDistance) *
             radarTrueRadius;
@@ -146,7 +158,7 @@ export class Radar {
 
   private drawBlimp(position: THREE.Vector2, fillStyle: string) {
     this.canvasContext.beginPath();
-    this.canvasContext.arc(position.x, position.y, 2, 0, Math.PI * 2);
+    this.canvasContext.arc(position.x, position.y, 2, 0, TWO_PI);
     this.canvasContext.fillStyle = fillStyle;
     this.canvasContext.fill();
     this.canvasContext.closePath();
