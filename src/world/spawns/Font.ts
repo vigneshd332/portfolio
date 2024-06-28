@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { loadFont } from "../loaders/FontLoader";
+import { PI_BY_THREE } from "../helpers/constants";
 
 export async function getFontSpawns(): Promise<FontSpawn[]> {
   const font = await loadFont();
@@ -10,7 +11,7 @@ export async function getFontSpawns(): Promise<FontSpawn[]> {
       text: "PROJECTS",
       position: new THREE.Vector3(4900, 400, -2500),
 
-      rotation: new THREE.Vector3(0, Math.PI / 3 - 2.5, 0),
+      rotation: new THREE.Vector3(0, PI_BY_THREE - 2.5, 0),
       onClick: () => {
         window.location.href = "/about#projects";
       },

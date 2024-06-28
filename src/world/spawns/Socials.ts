@@ -12,19 +12,19 @@ export async function getSocialSpawns(): Promise<SocialSpawn[]> {
       platformModel: platform1Model,
       position: new THREE.Vector3(0, 69, -2000),
       socialModel: githubModel,
-      iconName: "github",
+      iconName: "GitHub",
     },
     {
       platformModel: platform1Model,
       position: new THREE.Vector3(-500, 69, -2000),
       socialModel: twitterModel,
-      iconName: "twitter",
+      iconName: "Twitter",
     },
     {
       platformModel: platform1Model,
       position: new THREE.Vector3(-1000, 69, -2000),
       socialModel: linkedinModel,
-      iconName: "linkedin",
+      iconName: "LinkedIn",
     },
   ];
 }

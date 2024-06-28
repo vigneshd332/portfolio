@@ -116,7 +116,8 @@ export class Radar {
         this.preComputedConstants.HALF_CANVAS_WIDTH,
         this.preComputedConstants.HALF_CANVAS_HEIGHT
       ),
-      "white"
+      "white",
+      ""
     );
 
     // Draw Target Blimps
@@ -150,17 +151,21 @@ export class Radar {
             ? "#1da1f2"
             : target.name.includes("ship")
             ? "#26d266"
-            : "#ff7139"
+            : "#ff7139",
+          target.name.split("-")[2]
         );
       }
     });
   }
 
-  private drawBlimp(position: THREE.Vector2, fillStyle: string) {
+  private drawBlimp(position: THREE.Vector2, fillStyle: string, name: string) {
     this.canvasContext.beginPath();
     this.canvasContext.arc(position.x, position.y, 2, 0, TWO_PI);
     this.canvasContext.fillStyle = fillStyle;
     this.canvasContext.fill();
     this.canvasContext.closePath();
+    this.canvasContext.fillStyle = "white";
+    this.canvasContext.font = "10px Arial";
+    this.canvasContext.fillText(name, position.x + 5, position.y + 5);
   }
 }

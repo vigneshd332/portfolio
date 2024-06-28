@@ -19,7 +19,7 @@ export const cardData: CardData[] = [
   },
   {
     img: portfolio,
-    title: "Vignesh Duraisamy | Portfolio",
+    title: "Vignesh Duraisamy | 3D Portfolio",
     text: "Designed and Developed an interactive 3D portfolio with THREE.js and React to show my projects and past work experiences. Integrated various 3D models of aircraft and ships to show a game like portfolio where users can click on relevant links and icons to view information about me.",
     websites: [
       { icon: globe, url: "https://net-runner.dev/" },

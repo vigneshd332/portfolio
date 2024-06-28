@@ -9,21 +9,21 @@ export interface OffsetMap {
 }
 
 const offsets: OffsetMap = {
-  github: {
+  GitHub: {
     scale: new THREE.Vector3(0.5, 0.5, 0.5),
     position: new THREE.Vector3(0, 15, 0),
     onClick: () => {
       window.open("https://github.com/vigneshd332", "_blank");
     },
   },
-  twitter: {
+  Twitter: {
     scale: new THREE.Vector3(40, 40, 40),
     position: new THREE.Vector3(0, 135, 20),
     onClick() {
       window.open("https://twitter.com/HBM2E", "_blank");
     },
   },
-  linkedin: {
+  LinkedIn: {
     scale: new THREE.Vector3(50, 50, 50),
     position: new THREE.Vector3(0, -20, 0),
     onClick() {

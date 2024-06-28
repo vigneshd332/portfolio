@@ -4,6 +4,7 @@ import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Player } from "./objects";
 import { loadEvents, loadSceneAssets } from "./loaders";
+import isTouchDevice from "../ui/helpers/isTouchDevice";
 
 const MAP_SIZE = 150000;
 
@@ -24,7 +25,11 @@ export default async function init(
   if (!container || rendered) return;
   rendered = true;
 
-  renderer = new THREE.WebGLRenderer({ precision: "lowp", antialias: true });
+  const useHighP = isTouchDevice() && window.innerWidth < 1024;
+  renderer = new THREE.WebGLRenderer({
+    precision: useHighP ? "highp" : "lowp",
+    antialias: !useHighP,
+  });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.CineonToneMapping;

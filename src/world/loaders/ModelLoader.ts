@@ -3,7 +3,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath(
-  "https://raw.githubusercontent.com/mrdoob/three.js/r134/examples/js/libs/draco/"
+  "https://raw.githubusercontent.com/mrdoob/three.js/r135/examples/js/libs/draco/"
 );
 
 export async function loadModel(path: string): Promise<THREE.Group> {

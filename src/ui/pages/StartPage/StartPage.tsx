@@ -8,32 +8,24 @@ const StartPage = () => {
   return (
     <div className={styles.startPageWrapper}>
       <div className={styles.startPage}>
-        <div className={styles.header}>Choose a portfolio version</div>
+        <div className={styles.header}>Vignesh's Portfolio</div>
         <div className={styles.redPillOrBluePill}>
+          <div className={styles.card} onClick={() => navigate("/about")}>
+            <div className={styles.imgContainer}>
+              <img className={styles.img} src={simpleImg} alt="About Me" />
+            </div>
+            <div className={styles.imgAbout}>About Me</div>
+          </div>
           <div
             className={styles.card}
             onClick={() => (window.location.pathname = "/world")}
           >
             <div className={styles.imgContainer}>
-              <img
-                className={styles.img}
-                src={worldImg}
-                alt="3D World Portfolio"
-              />
+              <img className={styles.img} src={worldImg} alt="3D Simulation" />
             </div>
             <div className={styles.imgAbout}>
-              3D Portfolio Game [Work in Progress]
+              Interactive 3D Simulation [Work in Progress]
             </div>
-          </div>
-          <div className={styles.card} onClick={() => navigate("/about")}>
-            <div className={styles.imgContainer}>
-              <img
-                className={styles.img}
-                src={simpleImg}
-                alt="Simple Portfolio"
-              />
-            </div>
-            <div className={styles.imgAbout}>Simple Portfolio</div>
           </div>
         </div>
       </div>
